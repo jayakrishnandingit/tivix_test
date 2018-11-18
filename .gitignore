@@ -1,0 +1,5 @@
+*.pyc
+*.log
+__pycache__
+# Since we have secrets in them.
+docker-compose.yml

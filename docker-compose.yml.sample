@@ -1,0 +1,34 @@
+version: '3'
+
+
+services:
+    tivix_db:
+        container_name: tivix_db
+        image: postgres
+        ports:
+            - "5433:5432"
+        expose:
+            - "5433"
+        environment:
+            - POSTGRES_USER=<your-user>
+            - POSTGRES_PASSWORD=<your-password>
+            - POSTGRES_DB=tivix_test
+
+    tivix_web:
+        container_name: tivix_web
+        build: .
+        volumes:
+            - .:/code
+        command: python3 manage.py runserver 0.0.0.0:8000
+        ports:
+            - "8000:8000"
+        links:
+            - tivix_db
+        environment:
+            - POSTGRES_HOST=tivix_db
+            - POSTGRES_PORT=5432
+            - POSTGRES_USER=<your-user>
+            - POSTGRES_PASSWORD=<your-password>
+            - POSTGRES_DB=tivix_test
+            - DJANGO_SETTINGS_MODULE=tivix_test.settings.dev
+            - DJANGO_SECRET_KEY=!@iamnotasecret@!
