@@ -1,5 +1,5 @@
 <!doctype html>
-{% load staticfile %}
+{% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -14,6 +14,7 @@
   </head>
   <body>
     {% include "partials/navbar.html" %}
+    {% include "partials/messages.html" %}
     {% block content %}{% endblock %}
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{% static 'js/jquery-3.3.1.min.js' %}" crossorigin="anonymous"></script>

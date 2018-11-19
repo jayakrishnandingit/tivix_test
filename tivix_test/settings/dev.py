@@ -17,5 +17,6 @@ DATABASES = {
     }
 }
 
-print('SECRET_KEY', SECRET_KEY)
-print('SETTINGS', os.environ['DJANGO_SETTINGS_MODULE'])
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]

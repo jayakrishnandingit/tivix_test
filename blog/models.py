@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from blog.utils import generate_slug
 
@@ -31,6 +32,9 @@ class BlogPost(TimestampMixin):
         if created and not self.slug:
             self.slug = generate_slug(self.title)
         super(BlogPost, self).save(**kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog-post-detail', args=(self.slug,))
 
     def __str__(self):
         return self.title

@@ -2,36 +2,25 @@
 {% load static %}
 {% block content %}
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="text-center center-block">
-                    <a href="{% url 'blog-post-create' %}" class="btn btn-primary btn-lg">Write new blog</a>
-                </div>
-                <br />
-            </div>
-        </div>
         <div class="row">
           <div class="col-sm-12">
-            {% for blog in blogs %}
-              <div class="card">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'blog-post-detail' blog.slug %}">
-                            {{ blog.title }}
-                        </a>
+                        {{ blog.title }}
                     </h5>
                     <p class="card-text">
-                        {{ blog.description|linebreaksbr|truncatewords_html:20 }}
+                        {{ blog.description|linebreaksbr }}
                     </p>
                     <p class="card-text">
                         <small class="text-muted created-at-content" data-created_at="{{blog.created_at|date:'c'}}" data-author="{{blog.author}}">
                             By {{ blog.author }} on {{ blog.created_at|date:"D d M Y" }} {{ blog.created_at|time:"h:i a" }}
                         </small>
                     </p>
+                    <a href="{% url 'blog-post-update' blog.pk %}" class="btn btn-primary">Update this blog</a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary">&lt;&lt;&nbsp;Back to list</a>
                 </div>
-              </div>
-              <hr />
-            {% endfor %}
+            </div>
           </div>
         </div>
     </div>
