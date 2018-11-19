@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
@@ -57,7 +56,6 @@ class BlogPostCreate(CreateView):
         return super().get_success_url()
 
 
-
 class BlogPostDetail(DetailView):
     """
     View to display the details about a blog post.
@@ -98,4 +96,3 @@ class BlogPostUpdate(UpdateView):
         """
         messages.success(self.request, _("Blog post saved!"))
         return super().get_success_url()
-
