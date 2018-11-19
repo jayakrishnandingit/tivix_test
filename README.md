@@ -2,8 +2,8 @@
 
 ### Pre-requisites
 
-* `docker 18.06.1-ce`.
-* `docker-compose 1.23.1`.
+* `docker`. Tested in version `18.06.1-ce`.
+* `docker-compose`. Tested in version `1.23.1`.
 
 ### Setup
 
