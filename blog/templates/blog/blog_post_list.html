@@ -2,14 +2,6 @@
 {% load static %}
 {% block content %}
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="text-center center-block">
-                    <a href="{% url 'blog-post-create' %}" class="btn btn-primary btn-lg">Write new blog</a>
-                </div>
-                <br />
-            </div>
-        </div>
         <div class="row">
           <div class="col-sm-12">
             {% for blog in blogs %}

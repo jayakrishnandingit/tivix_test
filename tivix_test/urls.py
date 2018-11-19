@@ -23,5 +23,6 @@ urlpatterns = [
     path('', blog_views.BlogPostList.as_view(), name='home'),
     path('blogs/add/', blog_views.BlogPostCreate.as_view(), name='blog-post-create'),
     path('blogs/<int:pk>/', blog_views.BlogPostUpdate.as_view(), name='blog-post-update'),
-    path('blogs/<slug:slug>/', blog_views.BlogPostDetail.as_view(), name='blog-post-detail'),
+    # using <str:slug> to allow unicode slugs.
+    path('blogs/<str:slug>/', blog_views.BlogPostDetail.as_view(), name='blog-post-detail'),
 ]

@@ -7,9 +7,11 @@ from django.utils.text import slugify
 def generate_slug(string, allow_unicode=True):
     """
     A util to generate a slug from a string.
-    We enable unicode handling by default as opposed to django's slugify.
+    
+    * We enable unicode handling by default as opposed to django's slugify.
+    * Also, we limit the slug to 50 characters by default.
     """
-    return slugify(string, allow_unicode=allow_unicode)
+    return slugify(string[:50], allow_unicode=allow_unicode)
 
 
 def allow_clean_links(tag, attr_name, attr_value):

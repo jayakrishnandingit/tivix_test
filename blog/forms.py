@@ -34,7 +34,7 @@ class BlogPostForm(forms.ModelForm):
         else:
             raise forms.ValidationError(_('Invalid value.'))
 
-        return clean_value(self.cleaned_data['title'])  # remove all HTML tags.
+        return clean_value(self.cleaned_data['title'], tags=[])  # remove all HTML tags.
 
     def clean_description(self):
         # make sure it is alphanumeric.
@@ -59,7 +59,7 @@ class BlogPostForm(forms.ModelForm):
         model = BlogPost
         exclude = ['slug']
         widgets = {
-            'author': forms.TextInput(attrs={'class': 'form-control'}),
+            'author': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'you@example.com'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
