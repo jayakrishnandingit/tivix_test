@@ -32,32 +32,46 @@ DJANGO_SECRET_KEY=<your-secret-key>
 ```
 *NOTE: docker will automatically create PostgreSQL user and DB according to the values set in your environment variables.*
 
-*NOTE: I have defined `django settings` under `settings/` directory with 3 files `base.py`, `dev.py`, and `production.py`. This helps us in separating concerns while running in different environments. While running the application we can specify which settings file to use by providing appropriate value for `DJANGO_SETTINGS_MODULE` environment variable in `docker-compose.yml` file. By default, it points to `dev.py`.*
+I have defined `django settings` under `settings/` directory with 3 files `base.py`, `dev.py`, and `production.py`. This helps us in separating concerns while running in different environments. While running the application we can specify which settings file to use by providing appropriate value for `DJANGO_SETTINGS_MODULE` environment variable in `docker-compose.yml` file. By default, it points to `dev.py`.
 
-### Run our docker services
+#### Build our docker services
 
 Get the database up and running first.
 ```
 docker-compose up --build tivix_db
 ```
 
-Now build and start our Django website. Open a new tab in terminal.
+Now build the django web service. Open a new tab in terminal.
 ```
-docker-compose up --build tivix_web
+docker-compose build tivix_web
+```
+
+Once it is built, we need to run, migrations to create required tables in the database.
+```
+docker-compose run --rm tivix_web python manage.py migrate
+```
+
+*NOTE: Since this is a development setup, we are not running `collectstatic`.*
+
+#### Running tests
+
+Once we have the docker services setup we can execute our tests.
+
+1. Code cleanup check
+```
+docker-compose run --rm tivix_web flake8 .
+```
+
+2. Unittests
+```
+docker-compose run --rm tivix_web python manage.py test -k
+```
+
+### Run application
+
+Now we can start the django dev server.
+```
+docker-compose up tivix_web
 ```
 
 Now you should be able to access the website at http://localhost:8000.
-
-### Running tests
-
-Once we have the docker services up and running we can use the same docker containers to execute our tests.
-
-#### Code cleanup check
-```
-docker-compose exec tivix_web flake8 .
-```
-
-#### Unittests
-```
-docker-compose exec tivix_web python manage.py test -k
-```
